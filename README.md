@@ -28,7 +28,7 @@ export SEARCH_API_KEY="<Your Search API Key>"
 
 ## Run the Sample Code
 
-1. Run the Create Phonetic Index script. This script will setup an index with the name provided in the phoneticConfig.py file. Additionally, it will create the 11 analyzers with the phonetic encoding options available.
+Run the Create Phonetic Index script. This script will setup an index with the name provided in the phoneticConfig.py file. Additionally, it will create the 11 analyzers with the phonetic encoding options available.
 
 ```bash
 python3 createPhoneticIndex.py
@@ -41,7 +41,7 @@ Starting Index Creation
 Completed index Creation
 ```
 
-1. Run the evaluation benchmark for the phonetic encoders.
+Run the evaluation benchmark for the phonetic encoders.
 
 ```bash
 python3 analyzerTest.py
