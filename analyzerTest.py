@@ -38,7 +38,7 @@ def run_test():
     summary_ratios = {}
 
     for analyzer in analyzers:
-        print("### Analyzer: %a ###\n" %analyzer)
+        print("############################## Analyzer: %a ################################\n" %analyzer)
         summary_ratios[analyzer] = 0
 
         for testGroup in cfg.testGroups:
