@@ -1,10 +1,11 @@
 # Azure Cognitive Search - Phonetic Search
 
-This repo contains scripts to setup an index with phonetic search to help evaluate and benchmark the phonetic encoders.
+This repo contains scripts to setup an index with phonetic search to help evaluate and benchmark the [phonetic encoders](https://docs.microsoft.com/en-us/dotnet/api/azure.search.documents.indexes.models.phoneticencoder?view=azure-dotnet).
 
 ## Pre-work
 
 1. Python 3.6 or later
+1. Azure Sbuscription is needed.
 1. Setup the [Azure Cognitive Search service](https://docs.microsoft.com/en-us/azure/search/search-create-service-portal).
 
 ## Setup the Environment
@@ -40,6 +41,10 @@ Output:
 Starting Index Creation
 Completed index Creation
 ```
+
+Go to the Azure portal, find your Azure Cognitive Search service, go to the indexes and click on the "phoneticindex" and look at the Index Definition, you will see the analyzers setup. See below screenshot for reference.
+
+![index definition](/images/s1.png)
 
 Run the evaluation benchmark for the phonetic encoders.
 
@@ -493,11 +498,12 @@ Analyzer: doubleMetaphone => Score: 4.266666666666667
 Analyzer: metaphone => Score: 3.933333333333333
 ```
 
-Based on the scenarios in the phoneticConfig.py, the best options for phonetic analyzer are either cologne, haasePhonetik, or koelnerPhonetik
+Based on the scenarios defined in the phoneticConfig.py, the benchmark shows that the best option for phonetic analyzer is either cologne, haasePhonetik, or koelnerPhonetik
 
-You can modify the test groups in the phoneticConfig.py file to match your phonetic search scenario to determine the best analyzer to use.
+You can modify the test groups in the phoneticConfig.py file to match your phonetic search scenarios to determine the best analyzer to use.
 
 ```python
+# phoneticConfig.py
 # The tests to use for validating the phonetic analyzers
 testGroups = [
     ["john", "jon", "jhon"],
