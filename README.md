@@ -22,9 +22,18 @@ pip install azure-search-documents
 
 Setup the Cognitive Search connection information environment variables.
 
+If using bash:
+
 ```bash
 export SEARCH_ENDPOINT="<Your Azure Cognitive Search Endpoint>"
 export SEARCH_API_KEY="<Your Search API Key>"
+```
+
+If using PowerShell:
+
+```powershell
+$env:SEARCH_ENDPOINT="<Your Azure Cognitive Search Endpoint>"
+$env:SEARCH_API_KEY="<Your Search API Key>"
 ```
 
 ## Run the Sample Code
