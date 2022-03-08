@@ -4,7 +4,7 @@ This repo contains scripts to setup an index with phonetic search to help evalua
 
 ## Pre-work
 
-1. VS Code
+1. Understand how the [Cognitive Search .NET SDK](https://docs.microsoft.com/en-us/dotnet/api/overview/azure/search.documents-readme) works.
 1. Azure Sbuscription is needed.
 1. Setup the [Azure Cognitive Search service](https://docs.microsoft.com/en-us/azure/search/search-create-service-portal).
 
