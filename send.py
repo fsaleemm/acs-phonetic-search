@@ -22,8 +22,8 @@ def send_to_index():
         },
         {
             'id': '2',
-            'name': 'harison',
-            field_name: 'harison'
+            'name': 'Harison',
+            field_name: 'Harison'
         },
         {
             'id': '3',
@@ -84,6 +84,16 @@ def send_to_index():
             'id': '14',
             'name': 'keon',
             field_name: 'keon'
+        },
+        {
+            'id': '15',
+            'name': 'TRACE BURGER',
+            field_name: 'TRACE BURGER'
+        },
+        {
+            'id': '16',
+            'name': 'TRACE BURGER JOHN',
+            field_name: 'TRACE BURGER JOHN'
         }
     ]
 
