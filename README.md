@@ -2,7 +2,7 @@
 
 This repo contains scripts to setup an index with phonetic search to help evaluate and benchmark the [phonetic encoders](https://docs.microsoft.com/en-us/dotnet/api/azure.search.documents.indexes.models.phoneticencoder?view=azure-dotnet).
 
-For .NET SDK example go [here](/../../tree/NET/v11/).
+For .NET SDK example for creating Phoentic index go [here](/../../tree/netexample/NET/v11/).
 
 ## Pre-work
 
