@@ -1,6 +1,8 @@
-# Azure Cognitive Search - Phonetic Search (.NET SDK)
+# Azure Cognitive Search - Customer Analyzers & Phonetic Search (.NET SDK)
 
 This repo contains scripts to setup an index with phonetic search to help evaluate and benchmark the [phonetic encoders](https://docs.microsoft.com/en-us/dotnet/api/azure.search.documents.indexes.models.phoneticencoder?view=azure-dotnet).
+
+Read through tutorial for [Custom Analyzer for phone numbers](https://learn.microsoft.com/en-us/azure/search/tutorial-create-custom-analyzer) in Azure Cognitive Search for details on how custom analyzers work.
 
 ## Pre-work
 

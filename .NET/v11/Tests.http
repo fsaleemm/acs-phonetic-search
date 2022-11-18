@@ -1,0 +1,121 @@
+@contentType = application/json
+@APIKey = <Your Search Service Management Key>
+@SearchEndpoint =  https://<Your Search Service Name>.search.windows.net
+@IndexName = phoneticindex
+@APIVersion = 2021-04-30-Preview
+
+
+### Send Test Documents ###
+
+POST {{SearchEndpoint}}/indexes/{{IndexName}}/docs/index?api-version={{APIVersion}}
+Content-Type: {{contentType}}
+api-key: {{APIKey}}
+
+{
+    "value": [
+        {
+        "@search.action": "mergeOrUpload",
+        "id": "1",
+        "name": "john",
+        "phoneticname" : "john",
+        "phone": "123-456-7890"
+        },
+        {
+        "@search.action": "mergeOrUpload",
+        "id": "2",
+        "name": "jon",
+        "phoneticname" : "jon",
+        "phone": "(123) 456 7890"
+        }
+    ]
+}
+
+
+
+### Analyzer Tests ###
+
+POST {{SearchEndpoint}}/indexes/{{IndexName}}/analyze?api-version={{APIVersion}}
+Content-Type: {{contentType}}
+api-key: {{APIKey}}
+
+ {
+    "text": "john",
+    "analyzer": "cologne"
+}
+
+###
+
+POST {{SearchEndpoint}}/indexes/{{IndexName}}/analyze?api-version={{APIVersion}}
+Content-Type: {{contentType}}
+api-key: {{APIKey}}
+
+ {
+    "text": "jon",
+    "analyzer": "cologne"
+}
+
+###
+
+POST {{SearchEndpoint}}/indexes/{{IndexName}}/analyze?api-version={{APIVersion}}
+Content-Type: {{contentType}}
+api-key: {{APIKey}}
+
+ {
+    "text": "123-456-7890",
+    "analyzer": "phone_analyzer"
+}
+
+###
+
+POST {{SearchEndpoint}}/indexes/{{IndexName}}/analyze?api-version={{APIVersion}}
+Content-Type: {{contentType}}
+api-key: {{APIKey}}
+
+ {
+    "text": "123-456-7890",
+    "analyzer": "phone_analyzer_search"
+}
+
+###
+
+POST {{SearchEndpoint}}/indexes/{{IndexName}}/analyze?api-version={{APIVersion}}
+Content-Type: {{contentType}}
+api-key: {{APIKey}}
+
+ {
+    "text": "1234567890",
+    "analyzer": "phone_analyzer"
+}
+
+###
+
+POST {{SearchEndpoint}}/indexes/{{IndexName}}/analyze?api-version={{APIVersion}}
+Content-Type: {{contentType}}
+api-key: {{APIKey}}
+
+ {
+    "text": "1234567890",
+    "analyzer": "phone_analyzer_search"
+}
+
+###
+
+POST {{SearchEndpoint}}/indexes/{{IndexName}}/analyze?api-version={{APIVersion}}
+Content-Type: {{contentType}}
+api-key: {{APIKey}}
+
+ {
+    "text": "(123) 456 7890",
+    "analyzer": "phone_analyzer"
+}
+
+###
+
+POST {{SearchEndpoint}}/indexes/{{IndexName}}/analyze?api-version={{APIVersion}}
+Content-Type: {{contentType}}
+api-key: {{APIKey}}
+
+ {
+    "text": "(123) 456 7890",
+    "analyzer": "phone_analyzer_search"
+}

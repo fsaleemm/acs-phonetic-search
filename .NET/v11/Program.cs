@@ -24,6 +24,7 @@ namespace ACSIndexeCreation
                     new SimpleField("id", SearchFieldDataType.String) { IsKey = true, IsFilterable = true, IsSortable = true },
                     new SearchableField("name") { IsFilterable = true, AnalyzerName = LexicalAnalyzerName.EnMicrosoft },
                     new SearchableField("phoneticname") { IsFilterable = true, AnalyzerName = "cologne" },
+                    new SearchableField("phone") { IsFilterable = true, IndexAnalyzerName = "phone_analyzer", SearchAnalyzerName = "phone_analyzer_search" }
 
                 },
                 TokenFilters =
@@ -71,54 +72,78 @@ namespace ACSIndexeCreation
                     new PhoneticTokenFilter("soundex")
                     {
                         Encoder = PhoneticEncoder.Soundex
-                    }
+                    },
 
+                    // Custom Ngram Filter
+                    new NGramTokenFilter("custom_ngram_filter")
+                    {
+                        MinGram = 3,
+                        MaxGram = 20
+                    }
                 },
+
+                CharFilters = {
+                    new MappingCharFilter("phone_char_mapping", new List<String>() { "-=>", "(=>", ")=>", "+=>", ".=>", "\\u0020=>" })
+                },
+
                 Analyzers =
                 {
-                    new CustomAnalyzer("doubleMetaphone","microsoft_language_tokenizer")
+                    new CustomAnalyzer("doubleMetaphone", LexicalTokenizerName.MicrosoftLanguageTokenizer)
                     {
                         TokenFilters = { TokenFilterName.Lowercase, TokenFilterName.AsciiFolding, "doubleMetaphone" }
                     },
-                    new CustomAnalyzer("beiderMorse","microsoft_language_tokenizer")
+                    new CustomAnalyzer("beiderMorse", LexicalTokenizerName.MicrosoftLanguageTokenizer)
                     {
                         TokenFilters = { TokenFilterName.Lowercase, TokenFilterName.AsciiFolding, "beiderMorse" }
                     },
-                    new CustomAnalyzer("caverphone1","microsoft_language_tokenizer")
+                    new CustomAnalyzer("caverphone1", LexicalTokenizerName.MicrosoftLanguageTokenizer)
                     {
                         TokenFilters = { TokenFilterName.Lowercase, TokenFilterName.AsciiFolding, "caverphone1" }
                     },
-                    new CustomAnalyzer("caverphone2","microsoft_language_tokenizer")
+                    new CustomAnalyzer("caverphone2", LexicalTokenizerName.MicrosoftLanguageTokenizer)
                     {
                         TokenFilters = { TokenFilterName.Lowercase, TokenFilterName.AsciiFolding, "caverphone2" }
                     },
-                    new CustomAnalyzer("cologne","microsoft_language_tokenizer")
+                    new CustomAnalyzer("cologne", LexicalTokenizerName.MicrosoftLanguageTokenizer)
                     {
                         TokenFilters = { TokenFilterName.Lowercase, TokenFilterName.AsciiFolding, "cologne" }
                     },
-                    new CustomAnalyzer("haasePhonetik","microsoft_language_tokenizer")
+                    new CustomAnalyzer("haasePhonetik", LexicalTokenizerName.MicrosoftLanguageTokenizer)
                     {
                         TokenFilters = { TokenFilterName.Lowercase, TokenFilterName.AsciiFolding, "haasePhonetik" }
                     },
-                    new CustomAnalyzer("koelnerPhonetik","microsoft_language_tokenizer")
+                    new CustomAnalyzer("koelnerPhonetik", LexicalTokenizerName.MicrosoftLanguageTokenizer)
                     {
                         TokenFilters = { TokenFilterName.Lowercase, TokenFilterName.AsciiFolding, "koelnerPhonetik" }
                     },
-                    new CustomAnalyzer("metaphone","microsoft_language_tokenizer")
+                    new CustomAnalyzer("metaphone", LexicalTokenizerName.MicrosoftLanguageTokenizer)
                     {
                         TokenFilters = { TokenFilterName.Lowercase, TokenFilterName.AsciiFolding, "metaphone" }
                     },
-                    new CustomAnalyzer("nysiis","microsoft_language_tokenizer")
+                    new CustomAnalyzer("nysiis", LexicalTokenizerName.MicrosoftLanguageTokenizer)
                     {
                         TokenFilters = { TokenFilterName.Lowercase, TokenFilterName.AsciiFolding, "nysiis" }
                     },
-                    new CustomAnalyzer("refinedSoundex","microsoft_language_tokenizer")
+                    new CustomAnalyzer("refinedSoundex", LexicalTokenizerName.MicrosoftLanguageTokenizer)
                     {
                         TokenFilters = { TokenFilterName.Lowercase, TokenFilterName.AsciiFolding, "refinedSoundex" }
                     },
-                    new CustomAnalyzer("soundex","microsoft_language_tokenizer")
+                    new CustomAnalyzer("soundex", LexicalTokenizerName.MicrosoftLanguageTokenizer)
                     {
                         TokenFilters = { TokenFilterName.Lowercase, TokenFilterName.AsciiFolding, "soundex" }
+                    },
+
+                    // Phone Analyzer for Indexing
+                    new CustomAnalyzer("phone_analyzer", LexicalTokenizerName.Keyword)
+                    {
+                        TokenFilters = { "custom_ngram_filter" },
+                        CharFilters = { "phone_char_mapping" }
+                    },
+
+                    // Phone Analyzer for Searching
+                    new CustomAnalyzer("phone_analyzer_search", LexicalTokenizerName.Keyword)
+                    {
+                        CharFilters = { "phone_char_mapping" }
                     }
                 }
             };
